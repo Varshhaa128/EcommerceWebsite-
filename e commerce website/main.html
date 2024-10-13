@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore Options</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end; /* Aligns the popup to the bottom */
+            background-color: #f9f9f9;
+        }
+        .popup {
+            text-align: center;
+            width: 100%;
+            max-width: 900px;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0px -4px 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+        }
+        .popup h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .options {
+            display: flex;
+            justify-content: space-between;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .option {
+            background-color: #f0f0f0;
+            padding: 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            width: 200px;
+            text-align: center;
+        }
+        .option:hover {
+            background-color: #ddd;
+        }
+        .skip {
+            margin-top: 20px;
+            color: #007BFF;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="popup">
+        <h1>What would you like to explore today?</h1>
+        <div class="options">
+            <div class="option" onclick="goToPage('redeem_points.html')">
+                <img src="image/redeem_points.svg" alt="Redeem Points">
+                <p><strong>Redeem Points</strong></p>
+                <p>Consume your reward points for exciting gift-cards, experiences, and much more.</p>
+            </div>
+            <div class="option" onclick="goToPage('redeem_code.html')">
+                <img src="image/redeem_code.svg" alt="Redeem Code">
+                <p><strong>Redeem Code</strong></p>
+                <p>Explore rewards hassle-free. No login needed! Enjoy gift cards and more.</p>
+            </div>
+            <div class="option" onclick="goToPage('login_as_business.html')">
+                <img src="image/admin_login.svg" alt="Login as Business">
+                <p><strong>Login as Business</strong></p>
+                <p>Access your admin portal to distribute and manage rewards.</p>
+            </div>
+        </div>
+        <div class="skip" onclick="goToPage('index.html')">Skip For Now</div>
+    </div>
+
+    <script>
+        function goToPage(page) {
+            window.location.href = page;
+        }
+    </script>
+</body>
+</html>

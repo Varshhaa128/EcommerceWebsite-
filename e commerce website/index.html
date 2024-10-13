@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website with Header and Slider</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+
+        /* Header Styling */
+        .header {
+            background-color: white;
+            padding: 10px 20px;
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 120px;
+        }
+
+        .search-bar {
+            flex-grow: 1;
+            margin: 0 20px;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 10px 20px;
+            border-radius: 20px;
+            border: 1px solid #ddd;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            font-size: 14px;
+        }
+
+        .nav-links a {
+            color: #333;
+            text-decoration: none;
+            padding: 5px 10px;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .auth-buttons a {
+            color: white;
+            background-color: #007BFF;
+            padding: 8px 20px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        /* Slider Styling */
+        .slider-container {
+            position: relative;
+            max-width: 100%;
+            margin: 20px auto;
+            overflow: hidden;
+            border-radius: 10px;
+            height: 200px;
+        }
+
+        .slides {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            width: 500%; /* 5 slides */
+        }
+
+        .slides img {
+            width: 100%;
+            border-radius: 10px;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .prev, .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+
+        .prev { left: 10px; }
+        .next { right: 10px; }
+
+        /* Main Cards Section */
+        .main-cards-container {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px;
+        }
+
+        .main-card {
+            flex: 1;
+            margin: 10px;
+            padding: 20px;
+            background-color: #f2f2f2;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            text-align: center;
+            position: relative;
+        }
+
+        .main-card h2 {
+            margin: 10px 0;
+            font-size: 20px;
+        }
+
+        .main-card p {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        .explore-button {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        /* Sub Cards Section */
+        .sub-cards-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* 2 columns */
+            gap: 10px; /* Gap between cards */
+            margin-top: 20px;
+        }
+
+        .small-card {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .small-card img {
+            width: 100%;
+            height: 120px; /* Fixed height for images */
+            border-radius: 10px 10px 0 0;
+            object-fit: cover;
+        }
+
+        /* Cards Section */
+        .cards-container {
+            position: relative;
+            max-width: 100%;
+            margin: 20px auto;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+        }
+
+        .cards {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            width: 700%; /* 7 cards */
+        }
+
+        .card {
+            width: 200px; /* Increased card width */
+            height: 200px; /* Increased card height */
+            margin: 10px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .card img {
+            width: 100%;
+            height: 120px; /* Fixed height for images */
+            border-radius: 10px 10px 0 0;
+            object-fit: cover;
+        }
+
+        .prev-card, .next-card {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+
+        .prev-card { left: 10px; }
+        .next-card { right: 10px; }
+
+        /* Festive Delights Section */
+        .festive-delights-container {
+            margin: 20px;
+        }
+
+        .festive-explore {
+            display: flex;
+            justify-content: flex-end; /* Align the button to the right */
+            margin-bottom: 10px; /* Space between header and cards */
+        }
+
+        .festive-cards {
+            display: flex;
+            flex-wrap: wrap; /* Allows cards to wrap in the container */
+            gap: 10px; /* Space between cards */
+        }
+
+        .festive-card {
+            flex: 1 1 calc(20% - 10px); /* Each card takes up to 20% of the container width, minus margin */
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .festive-card img {
+            width: 100%;
+            height: 120px; /* Fixed height for images */
+            border-radius: 10px 10px 0 0;
+            object-fit: cover;
+        }
+        /*new section*/
+        .new-section-container {
+            margin: 50px;
+        }
+
+        .special-offers-card {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .special-card {
+            flex: 1; /* Allow each card to take equal space */
+            margin: 20px;
+            background-color: #f2f2f2;
+            border-radius: 10px;
+            box-shadow: 0 10px 5px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            text-align: center;
+            overflow: hidden; /* Ensures image fits within card */
+            max-width: 45%; /* Limit width for smaller cards */
+        }
+
+        .special-card img {
+            width: 100%; /* Smaller width for images */
+            height: auto; /* Maintain aspect ratio */
+            max-height: 100px; /* Fixed height for uniformity */
+            object-fit: cover;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .special-card div {
+            padding: 40px;
+            font-size: 14px; /* Slightly smaller font size */
+            font-weight: bold;
+        }
+        /* Hover effect for small cards */
+        .small-card:hover {
+            transform: scale(1.05); /* Slightly scale up on hover */
+        }
+
+        /* Additional single card styles */
+        .single-card {
+            margin-top: 20px; /* Space above the single card section */
+            padding: 20px; /* Padding inside the card */
+            background-color: #fff; /* Background color */
+            border-radius: 10px; /* Rounded corners */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Shadow effect */
+            text-align: center; /* Center text */
+            cursor: pointer; /* Pointer on hover */
+        }
+
+        /* Image style for single card */
+        .single-card img {
+            width: 100%; /* Image takes full width */
+            height: auto; /* Auto height for maintaining aspect ratio */
+            border-radius: 10px; /* Rounded corners */
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header class="header">
+        <div class="logo">
+            <img src="image/logo.png.jpeg" alt="Logo">
+        </div>
+        <div class="search-bar">
+            <input type="text" placeholder="Search for Merchandise">
+        </div>
+        <nav class="nav-links">
+            <a href="#">Merchandise</a>
+            <a href="#">Experience</a>
+            <a href="#">Gift Card</a>
+            <a href="#">Lounge</a>
+        </nav>
+        <div class="auth-buttons">
+            <a href="#">Sign In</a>
+            <a href="#">Cart</a>
+        </div>
+    </header>
+
+    <!-- Slider Section -->
+    <div class="slider-container">
+        <div class="slides">
+            <img src="image/slide1.jpg" alt="Slide 1">
+            <img src="image/slide2.jpg" alt="Slide 2">
+            <img src="image/slide3.jpg" alt="Slide 3">
+            <img src="image/slide4.jpg" alt="Slide 4">
+            <img src="image/slide5.jpg" alt="Slide 5">
+        </div>
+        <button class="prev" onclick="moveSlides(-1)">&#10094;</button>
+        <button class="next" onclick="moveSlides(1)">&#10095;</button>
+    </div>
+
+    <!-- Cards Section -->
+    <div class="cards-container">
+        <div class="cards">
+            <div class="card" onclick="window.location.href='path_to_gift_hamper'">
+                <img src="image/gift.jpeg" alt="Gift Hamper">
+                <div>Gift Hamper</div>
+            </div>
+            <div class="card" onclick="window.location.href='path_to_fashion'">
+                <img src="image/fasion.jpeg" alt="Fashion">
+                <div>Fashion and Lifestyle</div>
+            </div>
+            <div class="card" onclick="window.location.href='path_to_food_restaurant'">
+                <img src="image/food.jpeg" alt="Food and Restaurant">
+                <div>Food and Restaurant</div>
+            </div>
+            <div class="card" onclick="window.location.href='path_to_audio_accessories'">
+                <img src="image/audio.jpeg" alt="Audio Accessories">
+                <div>Audio Accessories</div>
+            </div>
+            <div class="card" onclick="window.location.href='path_to_home_kitchen'">
+                <img src="image/home.jpeg" alt="Home and Kitchen">
+                <div>Home and Kitchen</div>
+            </div>
+            <div class="card" onclick="window.location.href='path_to_grocery'">
+                <img src="image/grocery.jpeg" alt="Grocery">
+                <div>Grocery</div>
+            </div>
+            <div class="card" onclick="window.location.href='path_to_luggage_travel'">
+                <img src="image/luggage.jpg" alt="Luggage and Travel">
+                <div>Luggage and Travel</div>
+            </div>
+        </div>
+        <button class="prev-card" onclick="moveCards(-1)">&#10094;</button>
+        <button class="next-card" onclick="moveCards(1)">&#10095;</button>
+    </div>
+
+    <!-- Main Cards Section -->
+    <div class="main-cards-container">
+        <div class="main-card" onclick="window.location.href='path_to_merchandise'">
+            <h2>MERCHANDISE</h2>
+            <p>Find the Latest Trends in Products</p>
+            <div class="sub-cards-container">
+                <div class="small-card" onclick="window.location.href='path_to_product1'">
+                    <img src="image/mer.webp" alt="Product 1">
+                    <div>Product 1</div>
+                </div>
+                <div class="small-card" onclick="window.location.href='path_to_product2'">
+                    <img src="image/mer2.webp" alt="Product 2">
+                    <div>Product 2</div>
+                </div>
+                <div class="small-card" onclick="window.location.href='path_to_product3'">
+                    <img src="image/mer3.webp" alt="Product 3">
+                    <div>Product 3</div>
+                </div>
+                <div class="small-card" onclick="window.location.href='path_to_product4'">
+                    <img src="image/mer4.webp" alt="Product 4">
+                    <div>Product 4</div>
+                </div>
+            </div>
+            <a class="explore-button" href="path_to_merchandise">Explore All</a>
+        </div>
+        <div class="main-card" onclick="window.location.href='path_to_experiences'">
+            <h2>EXPERIENCES</h2>
+            <p>Discover Must-Try Activities</p>
+            <div class="sub-cards-container">
+                <div class="small-card" onclick="window.location.href='path_to_experience1'">
+                    <img src="image/exp1.jpeg" alt="Resort 1">
+                    <div>Resort 1</div>
+                </div>
+                <div class="small-card" onclick="window.location.href='path_to_experience2'">
+                    <img src="image/exp2.jpeg" alt="Resort 2">
+                    <div>Resort 2</div>
+                </div>
+                <div class="small-card" onclick="window.location.href='path_to_experience3'">
+                    <img src="image/exp3.jpeg" alt="Resort 3">
+                    <div>Resort 3</div>
+                </div>
+                <div class="small-card" onclick="window.location.href='path_to_experience4'">
+                    <img src="image/exp4.jpeg" alt="Resort 4">
+                    <div>Resort 4</div>
+                </div>
+            </div>
+            <a class="explore-button" href="path_to_experiences">Explore All</a>
+        </div>
+        <div class="main-card" onclick="window.location.href='path_to_gift_cards'">
+            <h2>GIFT CARDS</h2>
+            <p>Must-Have Gift Cards This Season</p>
+            <div class="sub-cards-container">
+                <div class="small-card" onclick="window.location.href='path_to_brand1'">
+                    <img src="image/puma.webp" alt="Puma">
+                    <div>Kalyan Jewelers</div>
+                </div>
+                <div class="small-card" onclick="window.location.href='path_to_brand2'">
+                    <img src="image/levis.webp" alt="Levi's">
+                    <div>Levi's</div>
+                </div>
+                <div class="small-card" onclick="window.location.href='path_to_brand3'">
+                    <img src="image/amazon.webp" alt="Amazon Prime">
+                    <div>Denim Brand</div>
+                </div>
+                <div class="small-card" onclick="window.location.href='path_to_brand4'">
+                    <img src="image/malbar.webp" alt="Malabar">
+                    <div>Brand 4</div>
+                </div>
+            </div>
+            <a class="explore-button" href="path_to_gift_cards">Explore All</a>
+        </div>
+    </div>
+
+    <!-- Festive Delights Section -->
+    <!-- Festive Delights Section -->
+<div class="festive-delights-container">
+    <p>FESTIVE DELIGHTS<p>
+    <h2>Trending Gift Hampers</h2>
+    <div class="festive-explore">
+        <a class="explore-button" href="path_to_festive_hampers">Explore All</a>
+    </div>
+    <div class="festive-cards">
+        <div class="festive-card" onclick="window.location.href='path_to_hamper1'">
+            <img src="image/treat1.webp" alt="House Of Treats | Diwali Festive Hamper">
+            <div>House Of Treats | Diwali Festive Hamper: Sweets Cookies</div>
+        </div>
+        <div class="festive-card" onclick="window.location.href='path_to_hamper2'">
+            <img src="image/treat2.webp" alt="RawFruit | Diwali Gifts Premium Nut Treat">
+            <div>RawFruit | Diwali Gifts Premium Nut Treat</div>
+        </div>
+        <div class="festive-card" onclick="window.location.href='path_to_hamper3'">
+            <img src="image/treat3.webp" alt="Unforgettable | Diwali Hamper Festive Fusion">
+            <div>Unforgettable | Diwali Hamper Festive Fusion</div>
+        </div>
+        <div class="festive-card" onclick="window.location.href='path_to_hamper4'">
+            <img src="image/treat4.webp" alt="RawFruit | Diwali Nuts Trio: Cashew Almond Pista">
+            <div>RawFruit | Diwali Nuts Trio: Cashew Almond Pista</div>
+        </div>
+        <div class="festive-card" onclick="window.location.href='path_to_hamper5'">
+            <img src="image/treat5.webp" alt="House Of Treats | Diwali Sweets: MilkCake">
+            <div>House Of Treats | Diwali Sweets: MilkCake</div>
+        </div>
+    </div>
+</div>
+
+<div class="new-section-container">
+    <div class="main-card" onclick="window.location.href='path_to_new_section'">
+    
+        <div class="sub-cards-container">
+            <div class="small-card" onclick="window.location.href='path_to_first_card'">
+                <img src="image/sec4.jpg" alt="">
+                
+            </div>
+            <div class="small-card" onclick="window.location.href='path_to_second_card'">
+                <img src="image/sec4a.jpg" alt="">
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- best selling section -->
+    <div class="best-selling-container">
+        <p>BEST SELLING SECTION<p>
+        <h2>Trending Gift Hampers</h2>
+        <div class="festive-explore">
+            <a class="explore-button" href="path_to_BEST_SELLING">Explore All</a>
+        </div>
+        <div class="festive-cards">
+            <div class="festive-card" onclick="window.location.href='path_to_hamper1'">
+                <img src="image/levis.webp" alt="">
+                <div>Levis</div>
+                <div>Starts from INR 700</div>
+            </div>
+            <div class="festive-card" onclick="window.location.href='path_to_hamper2'">
+                <img src="image/shoppers.webp" alt="RawFruit | Diwali Gifts Premium Nut Treat">
+                <div>Shoppers Shop</div>
+                <div>Starts from INR 700</div>
+            </div>
+            <div class="festive-card" onclick="window.location.href='path_to_hamper3'">
+                <img src="image/nykaa.webp" alt="Unforgettable | Diwali Hamper Festive Fusion">
+                <div>Nykaa</div>
+                <div>Starts from INR 700</div>
+            </div>
+            <div class="festive-card" onclick="window.location.href='path_to_hamper4'">
+                <img src="image/Amazona.webp" alt="RawFruit | Diwali Nuts Trio: Cashew Almond Pista">
+                <div>Amazon</div>
+                <div>Starts from INR 700</div>
+            </div>
+            <div class="festive-card" onclick="window.location.href='path_to_hamper5'">
+                <img src="image/myntra.webp" alt="House Of Treats | Diwali Sweets: MilkCake">
+                <div>Myntra</div>
+                <div>Starts from INR 700</div>
+            </div>
+        </div>
+    </div>
+    <div class="new-section-container">
+        <div class="single-card" onclick="window.location.href='path_to_single_card'">
+            <img src="image/sec5.jpg" alt="Single Card">
+        </div>
+    </div>
+    <div class="festive-delights-container">
+        <p>NEWLY ADDED<p>
+        <h2>Trending Food & Restaurant</h2>
+        <div class="festive-explore">
+            <a class="explore-button" href="path_to_festive_hampers">Explore All</a>
+        </div>
+        <div class="festive-cards">
+            <div class="festive-card" onclick="window.location.href='path_to_hamper1'">
+                <img src="image/kfc.webp" alt="House Of Treats | Diwali Festive Hamper">
+                <div>KFC INR</div>
+                <div>Starts From INR 100</div>
+            </div>
+            <div class="festive-card" onclick="window.location.href='path_to_hamper2'">
+                <img src="image/swiggy.webp" alt="RawFruit | Diwali Gifts Premium Nut Treat">
+                <div>Swiggy INR</div>
+                <div>Starts From INR 100</div>
+            </div>
+            <div class="festive-card" onclick="window.location.href='path_to_hamper3'">
+                <img src="image/baskin.webp" alt="Unforgettable | Diwali Hamper Festive Fusion">
+                <div>Baskin Robins INR</div>
+                <div>Starts From INR 100</div>
+            </div>
+            <div class="festive-card" onclick="window.location.href='path_to_hamper4'">
+                <img src="image/cafe.webp" alt="RawFruit | Diwali Nuts Trio: Cashew Almond Pista">
+                <div>Cafe Coffee Day INR</div>
+                <div>Starts From INR 100</div>
+            </div>
+            <div class="festive-card" onclick="window.location.href='path_to_hamper5'">
+                <img src="image/dominos.webp" alt="House Of Treats | Diwali Sweets: MilkCake">
+                <div> Domino's Pizza</div>
+                <div>Starts From INR 100</div>
+            </div>
+        </div>
+    </div>
+    <div class="festive-delights-container">
+        <p>Block Buster Exchange<p>
+        <h2>Trending Audio Accessories</h2>
+        <div class="festive-cards">
+            <div class="festive-card" onclick="window.location.href='path_to_hamper1'">
+                <img src="image/Samsung s23.jpg" alt="House Of Treats | Diwali Festive Hamper">
+                <div>samsung s23 </div>
+                <div>Starts From INR 75000</div>
+            </div>
+            <div class="festive-card" onclick="window.location.href='path_to_hamper2'">
+                <img src="image/redmi 13 c.jpg" alt="RawFruit | Diwali Gifts Premium Nut Treat">
+                <div>Redmi 13c</div>
+                <div>Starts From INR 65000</div>
+            </div>
+            <div class="festive-card" onclick="window.location.href='path_to_hamper3'">
+                <img src="image/apple iphone13.jpg" alt="Unforgettable | Diwali Hamper Festive Fusion">
+                <div>Apple iphone13</div>
+                <div>Starts From INR 85000</div>
+            </div>
+            <div class="festive-card" onclick="window.location.href='path_to_hamper4'">
+                <img src="image/Apple macbook.jpg" alt="RawFruit | Diwali Nuts Trio: Cashew Almond Pista">
+                <div>Apple macbook</div>
+                <div>Starts From INR 150000</div>
+            </div>
+            <div class="festive-card" onclick="window.location.href='path_to_hamper5'">
+                <img src="image/samsung m15.jpg" alt="House Of Treats | Diwali Sweets: MilkCake">
+                <div>Samsung M15</div>
+                <div>Starts From INR 11600</div>
+            </div>
+            <div class="festive-explore">
+                <a class="explore-button" href="path_to_festive_hampers">Explore All</a>
+            </div>
+        </div>
+    </div>
+    <script>
+        let slideIndex = 0;
+        showSlides(slideIndex);
+
+        function showSlides(n) {
+            const slides = document.querySelector('.slides');
+            const totalSlides = slides.children.length;
+            if (n >= totalSlides) { slideIndex = 0; }
+            if (n < 0) { slideIndex = totalSlides - 1; }
+            slides.style.transform = 'translateX(' + (-slideIndex * 100) + '%)';
+        }
+
+        function moveSlides(n) {
+            slideIndex += n;
+            showSlides(slideIndex);
+        }
+
+        // Card functionality
+        let cardIndex = 0;
+
+        function moveCards(n) {
+            const cards = document.querySelector('.cards');
+            cardIndex += n;
+            const totalCards = cards.children.length;
+            if (cardIndex < 0) cardIndex = 0; // Prevent going before first card
+            if (cardIndex > totalCards - 3) cardIndex = totalCards - 3; // Limit to last viewable card
+            cards.style.transform = 'translateX(' + (-cardIndex * (220 + 20)) + 'px)'; // Adjusting for width and margin
+        }
+
+        setInterval(() => {
+            moveSlides(1);
+        }, 10000000); // Adjusted interval to 5 seconds
+    </script>
+
+</body>
+</html>
