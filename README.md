@@ -32,7 +32,7 @@ e-commerce-website/
 ### 1. Download or Clone the Repository:
 
 ```bash
-git clone https://github.com/your-username/ecommerce-website.git
+git clone https://github.com/Varshhaa128/EcommerceWebsite.git
 ```
 
 ### 2. Open the Project in a Web Browser:
